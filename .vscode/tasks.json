@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-java",
+            "type": "shell",
+            "command": "javac",
+            "args": ["-d", "${workspaceFolder}/SocketsCourse2/out/production/SocketsCourse2", "-cp", "${workspaceFolder}/SocketsCourse2/lib/mysql-connector-j-8.4.0.jar", "${workspaceFolder}/SocketsCourse2/src/**/*.java"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "java",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+\\.java):(\\d+):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        },
+        {
+            "label": "run-server",
+            "type": "shell",
+            "command": "java",
+            "args": ["-cp", "${workspaceFolder}/SocketsCourse2/out/production/SocketsCourse2:${workspaceFolder}/SocketsCourse2/lib/mysql-connector-j-8.4.0.jar", "Server"],
+            "dependsOn": ["build-java"],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "run-client",
+            "type": "shell",
+            "command": "java",
+            "args": ["-cp", "${workspaceFolder}/SocketsCourse2/out/production/SocketsCourse2", "Client"],
+            "dependsOn": ["build-java"],
+            "group": "test"
+        },
+        {
+            "label": "run-client-gui",
+            "type": "shell",
+            "command": "java",
+            "args": ["-cp", "${workspaceFolder}/SocketsCourse2/out/production/SocketsCourse2", "ClientGUI"],
+            "dependsOn": ["build-java"],
+            "group": "test"
+        }
+    ]
+}
